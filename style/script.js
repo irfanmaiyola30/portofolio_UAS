@@ -3,10 +3,12 @@ function updateGreetingAndTime() {
     const hour = today.getHours();
     let greetingMessage;
 
-    if (hour < 12) {
+   if (hour < 10) {
         greetingMessage = "Selamat Pagi!";
-    } else if (hour < 18) {
+    } else if (hour < 15) {
         greetingMessage = "Selamat Siang!";
+    } else if (hour < 18) {
+        greetingMessage = "Selamat Sore!";
     } else {
         greetingMessage = "Selamat Malam!";
     }
