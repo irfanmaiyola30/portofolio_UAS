@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             greetingMessage = "Selamat Siang!";
         } else if (hour < 18) {
             greetingMessage = "Selamat Sore!";
-        } else {
+        } else (hour < 4) {
             greetingMessage = "Selamat Malam!";
         }
 
