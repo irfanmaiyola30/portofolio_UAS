@@ -56,3 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const userAgent = navigator.userAgent;
+    let deviceType;
+    if (/Mobi|Android/i.test(userAgent)) {
+        deviceType = "Mobile";
+    } else if (/Tablet|iPad/i.test(userAgent)) {
+        deviceType = "Tablet";
+    } else {
+        deviceType = "Desktop";
+    }
+    const deviceInfoElement = document.getElementById("device-info");
+    deviceInfoElement.textContent = `Kamu Menggunakan perangkat ${deviceType}`;
+});
+
