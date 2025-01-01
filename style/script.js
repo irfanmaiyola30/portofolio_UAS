@@ -86,5 +86,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("background-music");
-    audio.volume = 0.5; 
+
+    // Check if audio position is saved
+    const savedTime = localStorage.getItem("audioTime");
+    if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+    }
+
+    audio.play();
+
+    // Save current audio time before page unload
+    window.addEventListener("beforeunload", () => {
+        localStorage.setItem("audioTime", audio.currentTime);
+    });
 });
