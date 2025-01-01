@@ -1,33 +1,58 @@
-function updateGreetingAndTime() {
-    const today = new Date();
-    const hour = today.getHours();
-    let greetingMessage;
+document.addEventListener("DOMContentLoaded", function () {
+    function updateGreetingAndTime() {
+        const today = new Date();
+        const hour = today.getHours();
+        let greetingMessage;
 
-   if (hour < 10) {
-        greetingMessage = "Selamat Pagi!";
-    } else if (hour < 15) {
-        greetingMessage = "Selamat Siang!";
-    } else if (hour < 18) {
-        greetingMessage = "Selamat Sore!";
-    } else {
-        greetingMessage = "Selamat Malam!";
+        if (hour < 10) {
+            greetingMessage = "Selamat Pagi!";
+        } else if (hour < 15) {
+            greetingMessage = "Selamat Siang!";
+        } else if (hour < 18) {
+            greetingMessage = "Selamat Sore!";
+        } else {
+            greetingMessage = "Selamat Malam!";
+        }
+
+        const greetingElement = document.getElementById("greeting");
+        if (greetingElement) {
+            greetingElement.textContent = greetingMessage;
+        }
+
+        const timeString = today.toLocaleTimeString();
+        const timeElement = document.getElementById("current-time");
+        if (timeElement) {
+            timeElement.textContent = timeString;
+        }
+
+     
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = today.toLocaleDateString('id-ID', options);
+        const dateElement = document.getElementById("current-date");
+        if (dateElement) {
+            dateElement.textContent = dateString;
+        }
     }
 
 
-    document.getElementById("greeting").textContent = greetingMessage;
+    setInterval(updateGreetingAndTime, 1000);
+    updateGreetingAndTime();
 
-   
-    const timeString = today.toLocaleTimeString();
-    document.getElementById("current-time").textContent = timeString;
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentLocation = window.location.href;
 
-    
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const dateString = today.toLocaleDateString('id-ID', options);
-    document.getElementById("current-date").textContent = dateString;
-}
+    navLinks.forEach(link => {
+        if (link.href === currentLocation) {
+            link.classList.add('active', 'text-danger');
+        }
 
+        link.addEventListener('click', function () {
+           
+            navLinks.forEach(item => item.classList.remove('active', 'text-danger'));
 
-setInterval(updateGreetingAndTime, 1000);
+           
+            this.classList.add('active', 'text-danger');
+        });
+    });
+});
 
-
-updateGreetingAndTime();
