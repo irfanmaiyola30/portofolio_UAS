@@ -444,4 +444,10 @@ footer p:nth-child(2) {
             font-size: calc(1rem + 1vw);
         }
 
+ .nav-link.active {
+            font-weight: bold;
+            color: red !important;
+            text-decoration: underline;
+        }
+
 
