@@ -70,3 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
     deviceInfoElement.textContent = `Kamu Menggunakan perangkat ${deviceType}`;
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Menggunakan API untuk mendapatkan IP pengunjung
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            const ip = data.ip;
+            const ipElement = document.getElementById("user-ip");
+            ipElement.textContent = `Your IP address is: ${ip}`;
+        })
+        .catch(error => {
+            console.error("Error fetching IP address: ", error);
+        });
+});
