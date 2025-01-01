@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const hour = today.getHours();
         let greetingMessage;
 
-        if (hour < 10) {
+        if (hour >= 4 && hour < 10) {
             greetingMessage = "Selamat Pagi!";
-        } else if (hour < 15) {
+        } else if (hour >= 10 && hour < 15) {
             greetingMessage = "Selamat Siang!";
-        } else if (hour < 18) {
+        } else if (hour >= 15 && hour < 18) {
             greetingMessage = "Selamat Sore!";
-        } else (hour < 4) {
+        } else {
             greetingMessage = "Selamat Malam!";
         }
 
