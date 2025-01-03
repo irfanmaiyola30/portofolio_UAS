@@ -101,15 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    var navbarToggler = document.querySelector('.navbar-toggler');
-    var navbarCollapse = document.querySelector('#navbarNav');
-
-    navbarToggler.addEventListener('click', function() {
-        if (navbarCollapse.classList.contains('show')) {
-            navbarToggler.classList.remove('collapsed');
-        } else {
-            navbarToggler.classList.add('collapsed');
-        }
-    });
+document.querySelector('.navbar-toggler').addEventListener('click', function () {
+    this.classList.toggle('collapsed');
 });
