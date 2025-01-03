@@ -469,11 +469,13 @@ footer p:nth-child(2) {
     transition: transform 0.3s ease-in-out;
 }
 
+/* Ketika tombol navbar dalam keadaan aktif atau terbuka */
 .navbar-toggler.collapsed .navbar-toggler-icon {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
 }
 
+/* Ketika tombol navbar dalam keadaan "collapsed" */
 .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
 }
 
