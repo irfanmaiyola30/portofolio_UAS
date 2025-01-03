@@ -103,7 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener('DOMContentLoaded', function() {
     var navbarToggler = document.querySelector('.navbar-toggler');
+    var navbarCollapse = document.querySelector('#navbarNav');
+
     navbarToggler.addEventListener('click', function() {
-        this.classList.toggle('collapsed');
+        if (navbarCollapse.classList.contains('show')) {
+            navbarToggler.classList.remove('collapsed');
+        } else {
+            navbarToggler.classList.add('collapsed');
+        }
     });
 });
