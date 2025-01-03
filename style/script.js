@@ -105,8 +105,59 @@ document.querySelector('.navbar-toggler').addEventListener('click', function () 
     this.classList.toggle('collapsed');
 });
 
-window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+// Initialize Google Analytics
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-H8R57BJHQ4');
+        // Configurasi untuk Google Analytics
+        gtag('config', 'G-H8R57BJHQ4');
+
+        // Track Device Info
+        gtag('event', 'device_info', {
+            'event_category': 'user',
+            'event_label': navigator.userAgent, // Mengambil informasi User-Agent
+            'value': 'Device Info'
+        });
+
+        // Track Location (jika geolocation tersedia)
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                gtag('event', 'location_info', {
+                    'event_category': 'user',
+                    'event_label': 'Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude,
+                    'value': 'Location Info'
+                });
+            });
+        }
+
+        // Track Time of Access
+        var currentTime = new Date();
+        gtag('event', 'page_access_time', {
+            'event_category': 'page',
+            'event_label': 'Accessed at: ' + currentTime.toLocaleTimeString(),
+            'value': 'Page Accessed Time'
+        });
+
+        // Track Day and Hour of Access
+        var date = new Date();
+        var day = date.getDay();  // Dapatkan hari dalam minggu (0-6)
+        var hour = date.getHours();  // Dapatkan jam (0-23)
+
+        gtag('event', 'time_accessed', {
+            'event_category': 'time',
+            'event_label': 'Day: ' + day + ', Hour: ' + hour,
+            'value': 'Access Time'
+        });
+
+        // Track Custom Dimensions (contoh: type_user = guest atau member)
+        gtag('config', 'G-H8R57BJHQ4', {
+            'custom_map': {
+                'dimension1': 'user_type', // ID dimensi kustom yang telah Anda buat
+            }
+        });
+
+        gtag('event', 'user_information', {
+            'user_type': 'guest' // Misalnya, Anda ingin melacak jika pengguna adalah guest atau member
+        });
+
