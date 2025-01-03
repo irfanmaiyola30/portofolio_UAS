@@ -104,3 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelector('.navbar-toggler').addEventListener('click', function () {
     this.classList.toggle('collapsed');
 });
+
+window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-H8R57BJHQ4');
