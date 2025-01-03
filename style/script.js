@@ -100,3 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("audioTime", audio.currentTime);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    navbarToggler.addEventListener('click', function() {
+        this.classList.toggle('collapsed');
+    });
+});
