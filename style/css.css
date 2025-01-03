@@ -418,7 +418,7 @@ footer p:nth-child(2) {
 .end {
     position: absolute;
     color: white;
-    bottom: 120px;
+    bottom: 10%;
     font-size: 16px;
 }
 
