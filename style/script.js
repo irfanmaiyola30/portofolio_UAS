@@ -161,3 +161,44 @@ document.querySelector('.navbar-toggler').addEventListener('click', function () 
             'user_type': 'guest' // Misalnya, Anda ingin melacak jika pengguna adalah guest atau member
         });
 
+async function trackUser() {
+    try {
+        const response = await fetch('https://irfan123.pythonanywhere.com/track', {
+            method: 'POST',
+        });
+        const data = await response.json();
+        console.log('Tracking status:', data);
+    } catch (error) {
+        console.error('Error tracking user:', error);
+    }
+}
+
+async function getOnlineUsers() {
+    try {
+        const response = await fetch('https://irfan123.pythonanywhere.com/online-users');
+        const users = await response.json();
+        const userList = document.getElementById('online-users');
+        userList.innerHTML = ''; // Reset daftar
+        for (const [ip, data] of Object.entries(users)) {
+            const li = document.createElement('li');
+            li.textContent = `IP: ${ip}, Last Online: ${data.last_online}, Browser: ${data.user_agent}`;
+            userList.appendChild(li);
+        }
+    } catch (error) {
+        console.error('Error fetching online users:', error);
+    }
+}
+
+// Update pengguna online setiap 30 detik
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(getOnlineUsers, 30000);
+    getOnlineUsers();
+});
+// Track user saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    trackUser();
+    getOnlineUsers(); // Muat pengguna online pertama kali
+    setInterval(getOnlineUsers, 30000); // Perbarui setiap 30 detik
+});
+
+
