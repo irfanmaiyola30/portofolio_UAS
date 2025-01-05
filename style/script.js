@@ -175,21 +175,21 @@ async function trackUser() {
 
 async function getOnlineUsers() {
     try {
-        const response = await fetch('https://irfan123.pythonanywhere.com/online-users');
+        const response = await fetch(`${API_BASE_URL}/online-users`);
         const users = await response.json();
         const userList = document.getElementById('online-users');
-        userList.innerHTML = ''; // Reset daftar
-        for (const [ip, data] of Object.entries(users.current_users)) {
+        userList.innerHTML = ''; // Reset daftar pengguna
+
+        // Tampilkan semua pengguna
+        for (const [ip, data] of Object.entries(users.all_users)) {
             const li = document.createElement('li');
             li.innerHTML = `
                 <strong>IP:</strong> ${ip} <br>
+                <strong>First Seen:</strong> ${data.first_seen || 'Unknown'} <br>
                 <strong>Last Online:</strong> ${data.last_online} <br>
                 <strong>Browser:</strong> ${data.user_agent} <br>
                 <strong>Device:</strong> ${data.device_type} <br>
-                <strong>Location:</strong> ${data.geolocation} <br>
-                <strong>Status:</strong> ${data.last_seen > (Date.now() / 1000 - 300) ? 'Active' : 'Inactive'} <br>
-                <strong>Session Duration:</strong> ${Math.round(data.active_duration)} seconds <br>
-                <strong>Last Request:</strong> ${data.last_request}
+                <strong>Location:</strong> ${data.geolocation || 'Unknown'}
             `;
             userList.appendChild(li);
         }
@@ -197,6 +197,7 @@ async function getOnlineUsers() {
         console.error('Error fetching online users:', error);
     }
 }
+
 
 // Update pengguna online setiap 30 detik
 document.addEventListener('DOMContentLoaded', () => {
