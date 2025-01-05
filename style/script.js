@@ -179,9 +179,18 @@ async function getOnlineUsers() {
         const users = await response.json();
         const userList = document.getElementById('online-users');
         userList.innerHTML = ''; // Reset daftar
-        for (const [ip, data] of Object.entries(users)) {
+        for (const [ip, data] of Object.entries(users.current_users)) {
             const li = document.createElement('li');
-            li.textContent = `IP: ${ip}, Last Online: ${data.last_online}, Browser: ${data.user_agent}`;
+            li.innerHTML = `
+                <strong>IP:</strong> ${ip} <br>
+                <strong>Last Online:</strong> ${data.last_online} <br>
+                <strong>Browser:</strong> ${data.user_agent} <br>
+                <strong>Device:</strong> ${data.device_type} <br>
+                <strong>Location:</strong> ${data.geolocation} <br>
+                <strong>Status:</strong> ${data.last_seen > (Date.now() / 1000 - 300) ? 'Active' : 'Inactive'} <br>
+                <strong>Session Duration:</strong> ${Math.round(data.active_duration)} seconds <br>
+                <strong>Last Request:</strong> ${data.last_request}
+            `;
             userList.appendChild(li);
         }
     } catch (error) {
@@ -192,13 +201,5 @@ async function getOnlineUsers() {
 // Update pengguna online setiap 30 detik
 document.addEventListener('DOMContentLoaded', () => {
     setInterval(getOnlineUsers, 30000);
-    getOnlineUsers();
+    getOnlineUsers(); // Initial load
 });
-// Track user saat halaman dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    trackUser();
-    getOnlineUsers(); // Muat pengguna online pertama kali
-    setInterval(getOnlineUsers, 30000); // Perbarui setiap 30 detik
-});
-
-
