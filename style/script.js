@@ -201,5 +201,11 @@ async function getOnlineUsers() {
 // Update pengguna online setiap 30 detik
 document.addEventListener('DOMContentLoaded', () => {
     setInterval(getOnlineUsers, 30000);
-    getOnlineUsers(); // Initial load
+    getOnlineUsers();
+});
+// Track user saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    trackUser();
+    getOnlineUsers(); // Muat pengguna online pertama kali
+    setInterval(getOnlineUsers, 30000); // Perbarui setiap 30 detik
 });
